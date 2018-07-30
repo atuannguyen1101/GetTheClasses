@@ -24,6 +24,20 @@ async function readSpecific(url, key, value) {
 	})
 }
 
+async function moveObject(oldLocation, newLocation) {
+	var temp = await new Promise(resolve => {
+		database.ref(oldLocation).once("value").then((val) => {
+			resolve(val.val());
+		})
+	})
+	await new Promise(resolve => {
+		database.ref(oldLocation).set({});
+		database.ref(newLocation).set(temp);
+	});
+}
+
 module.exports = {
+	database,
+	moveObject,
 	readSpecific
 }
