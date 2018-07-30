@@ -8,9 +8,10 @@ let runtimeDict = {};
 let combinations = [];
 
 
-async function reSchedule(courseList, freeTime, crnList) {
+async function reSchedule(courseList, freeTime = mockData.mockFreeTime, crnList = []) {
 	if (courseList.length == 0) {
-		combinations.push(crnList);
+        combinations.push(crnList);
+        console.log(combinations);
 		return ;
 	}
 	var newCourseList = copy(courseList);
