@@ -10,21 +10,38 @@ import { HttpMethodService } from '../http-method.service';
 export class InputComponent {
   constructor(private methodHelper: HttpMethodService) { }
 
-  criteria: Criteria = {
-    major: '',
-    courseNumber: ''
-  }
+  
+
+  criteria: Criteria[] = [];
+  major: string;
+  courseNumber: string;
 
   getMajor(event: any): void {
-    this.criteria.major = event.target.value;
+    this.major = event.target.value;
   }
 
   getCourseNumber(event: any): void {
-    this.criteria.courseNumber = event.target.value;
+    this.courseNumber = event.target.value;
   }
 
-  submit(): any {
+  clear(): void {
+    this.criteria = [];
+    console.log(this.criteria);
+  }
+
+  save(): void {
+    this.criteria.push({
+      major: this.major,
+      courseNumber: this.courseNumber
+    });
+    console.log(this.criteria);
+  }
+
+  submit(): void {
     console.log(123);
-    return this.methodHelper.get('http://localhost:8000/api/cats');
+    this.methodHelper.post('http://localhost:8000/api/course', this.criteria)
+    .subscribe((data) => {
+      console.log(data);
+    });
   }
 }
