@@ -1,12 +1,13 @@
+require('dotenv').config();
 const firebase = require('firebase');
 
 firebase.initializeApp({
-    apiKey: "AIzaSyCPxuyldQzVJ05GSgDcMK8qthfC4ZJGvPI",
-    authDomain: "gettheclassdevelop.firebaseapp.com",
-    databaseURL: "https://gettheclassdevelop.firebaseio.com",
-    projectId: "gettheclassdevelop",
-    storageBucket: "",
-    messagingSenderId: "760366761022"
+    apiKey: process.env.APIKEY,
+    authDomain: process.env.AUTHDOMAIN,
+    databaseURL: process.env.DATABASEURL,
+    projectId: process.env.PROJECTID,
+    storageBucket: process.env.STORAGEBUCKET,
+    messagingSenderId: process.env.MESSAGINGSENDERID
 });
 
 let database = firebase.database();
